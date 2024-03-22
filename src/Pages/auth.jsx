@@ -35,12 +35,12 @@ const LoginComponent = ({ onLogin }) => {
                     <input type="password" className="form-control" id="exampleInputPassword1" required onChange={e => setUsername(e.target.value)} />
                 </div>
                 <button type="submit" className="btn btn-primary w-100">Submit</button>
-                <div className="mb-3 form-check mt-4">
+                {/* <div className="mb-3 form-check mt-4">
                     <span className="form-check-label" htmlFor="exampleCheck1">Je n'ai pas de compte créer un compte</span>
-                </div>
+                </div> */}
             </form>
         </div>
     );
 };
 
-export default LoginComponent;
+export default connect(null, { login })(LoginComponent);

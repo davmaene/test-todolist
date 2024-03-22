@@ -5,7 +5,8 @@ const initialState = {
         { id: 2, username: 'user', password: 'password' },
         { id: 2, username: 'sam', password: 'sam' },
     ],
-    isAuthenticated: false
+    isAuthenticated: false,
+    authError: null
 };
 
 const taskReducer = (state = initialState, action) => {
@@ -23,12 +24,14 @@ const taskReducer = (state = initialState, action) => {
         case 'LOGIN_SUCCESS':
             return {
                 ...state,
-                isAuthenticated: true
+                isAuthenticated: true,
+                authError: null
             };
         case 'LOGIN_FAILURE':
             return {
                 ...state,
-                isAuthenticated: false
+                isAuthenticated: false,
+                authError: 'Invalid username or password'
             };
         case 'LOGIN':
             const { username, password } = action.payload;
