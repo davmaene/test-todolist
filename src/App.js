@@ -1,25 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
 import './App.scss';
+import { HashRouter as Router, Route, Routes as Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import DashboardScreen from './Pages/dashboard';
+import AuthtScreen from './Pages/auth';
+import configureStore from './store/configureStore';
+import "./bootstrap/bootstrap.css"
+
+const store = configureStore()
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          
+          <Route exact path="/app/auth" element={<AuthtScreen />} />
+          {/* <Route exact path="/" element={<DashboardScreen />} /> */}
+          <Route render={() => <h2>La page que vous avez demandez n'est pas disponible pour le moment</h2>} />
+        </Switch>
+      </Router>
+    </Provider>
   );
 }
 
