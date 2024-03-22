@@ -15,6 +15,7 @@ function App() {
     <Provider store={store}>
       <Router>
         <Switch>
+          <Route exact path="/" element={<DashboardScreen />} />
           <Route exact path="/app/liste" element={<DashboardScreen />} />
           <Route exact path="/app/auth" element={<AuthtScreen />} />
           <Route exact path="/app/add" element={<TaskForm />} />
