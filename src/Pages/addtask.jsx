@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { addTask, logout } from '../actions/taskActions';
+import { Navigate as Redirect } from 'react-router-dom';
 
-const TaskForm = ({ addTask, authError, logout }) => {
+const TaskForm = ({ addTask, authError, logout, isAuthenticated }) => {
     const [taskName, setTaskName] = useState('');
     const [taskDate, setTaskDate] = useState('');
+    const [redirectToTasks,] = useState(true)
+
 
     const handleInputChange = (e) => {
         setTaskName(e.target.value);
@@ -21,6 +24,10 @@ const TaskForm = ({ addTask, authError, logout }) => {
             setTaskName('');
         }
     };
+
+    if (isAuthenticated && redirectToTasks) {
+        return <Redirect to="/app/auth" />;
+    }
 
     return (
         <div className='d-flex justify-content-center w-100'>
@@ -68,7 +75,8 @@ const TaskForm = ({ addTask, authError, logout }) => {
 };
 
 const mapStateToProps = (state) => ({
-    authError: state.authError
+    authError: state.authError,
+    isAuthenticated: state.isAuthenticated
 });
 
 export default connect(mapStateToProps, { addTask, logout })(TaskForm);

@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { deleteTask, logout } from '../actions/taskActions';
+import { Navigate as Redirect } from 'react-router-dom';
 
-const TaskList = ({ tasks, deleteTask, logout }) => {
+const TaskList = ({ tasks, deleteTask, logout, isAuthenticated }) => {
+    const [redirectToTasks,] = useState(true)
+
+    if (isAuthenticated && redirectToTasks) {
+        return <Redirect to="/app/auth" />;
+    }
+
     return (
         <div className='d-flex justify-content-center w-100'>
             <div className="col-lg-8">
@@ -55,7 +62,8 @@ const TaskList = ({ tasks, deleteTask, logout }) => {
 };
 
 const mapStateToProps = (state) => ({
-    tasks: state.tasks
+    tasks: state.tasks,
+    isAuthenticated: state.isAuthenticated
 });
 
 export default connect(mapStateToProps, { deleteTask, logout })(TaskList);
