@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteTask } from '../actions/taskActions';
+import { deleteTask, logout } from '../actions/taskActions';
 
-const TaskList = ({ tasks, deleteTask }) => {
+const TaskList = ({ tasks, deleteTask, logout }) => {
     return (
         <div className='d-flex justify-content-center w-100'>
             <div className="col-lg-8">
@@ -16,6 +16,12 @@ const TaskList = ({ tasks, deleteTask }) => {
                         window.location.href = "#/app/add"
                     }}>
                         Ajouter une tâche
+                    </button>
+                    <button className="btn btn-danger align-self-center" onClick={(e) => {
+                        e.preventDefault()
+                        logout()
+                    }}>
+                        Deconnexion
                     </button>
                 </div>
                 <hr />
@@ -52,4 +58,4 @@ const mapStateToProps = (state) => ({
     tasks: state.tasks
 });
 
-export default connect(mapStateToProps, { deleteTask })(TaskList);
+export default connect(mapStateToProps, { deleteTask, logout })(TaskList);

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { addTask } from '../actions/taskActions';
+import { addTask, logout } from '../actions/taskActions';
 
-const TaskForm = ({ addTask, authError }) => {
+const TaskForm = ({ addTask, authError, logout }) => {
     const [taskName, setTaskName] = useState('');
     const [taskDate, setTaskDate] = useState('');
 
@@ -36,6 +36,12 @@ const TaskForm = ({ addTask, authError }) => {
                     }}>
                         Liste des tâches
                     </button>
+                    <button className="btn btn-danger align-self-center" onClick={(e) => {
+                        e.preventDefault()
+                        logout()
+                    }}>
+                        Deconnexion
+                    </button>
                 </div>
                 <hr />
                 <div className="w-100 d-flex justify-content-center">
@@ -65,4 +71,4 @@ const mapStateToProps = (state) => ({
     authError: state.authError
 });
 
-export default connect(mapStateToProps, { addTask })(TaskForm);
+export default connect(mapStateToProps, { addTask, logout })(TaskForm);
