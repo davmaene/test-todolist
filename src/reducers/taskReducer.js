@@ -1,7 +1,5 @@
 const initialState = {
-    tasks: [
-        { id: 1882929, name: "Test 001", date: new Date().toLocaleString() }
-    ],
+    tasks: [],
     users: [
         { id: 1, username: 'admin', password: 'admin' },
         { id: 2, username: 'user', password: 'password' },
@@ -45,7 +43,8 @@ const taskReducer = (state = initialState, action) => {
         case 'LOGOUT':
             return {
                 ...state,
-                isAuthenticated: false
+                isAuthenticated: false,
+                authError: null 
             };
         default:
             return state;
