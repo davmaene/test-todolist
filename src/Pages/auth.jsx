@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../actions/taskActions';
+import { Navigate as Redirect } from 'react-router-dom';
 
-const LoginComponent = ({ onLogin, authError }) => {
+const LoginComponent = ({ onLogin, authError, isAuthenticated }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [redirectToTasks, setRedirectToTasks] = useState(false)
 
     const handleUsernameChange = (e) => {
         setUsername(e.target.value);
@@ -17,11 +19,16 @@ const LoginComponent = ({ onLogin, authError }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         onLogin(username, password);
+        setRedirectToTasks(isAuthenticated)
     };
+
+    if (isAuthenticated && redirectToTasks) {
+        return <Redirect to="/app/liste" />;
+    }
 
     return (
         <div className="w-100 d-flex justify-content-center">
-            <form onSubmit={handleSubmit} className='col-lg-4'>
+            <form onSubmit={handleSubmit} className='col-lg-4 mt-5'>
                 <div className="w-100">
                     <h1>Authentification</h1>
                     <p>Entrer vos informations ici</p>
@@ -36,7 +43,7 @@ const LoginComponent = ({ onLogin, authError }) => {
                 </div>
                 <button type="submit" className="btn btn-primary w-100">Connexion</button>
                 <div className="mb-3 form-check mt-4">
-                    <span className="form-check-label" htmlFor="exampleCheck1">
+                    <span className="form-check-label text-danger" htmlFor="exampleCheck1">
                         {authError && <p>{authError}</p>}
                     </span>
                 </div>
@@ -46,7 +53,8 @@ const LoginComponent = ({ onLogin, authError }) => {
 };
 
 const mapStateToProps = (state) => ({
-    authError: state.authError
+    authError: state.authError,
+    isAuthenticated: state.isAuthenticated
 });
 
 export default connect(mapStateToProps, { onLogin: login })(LoginComponent);

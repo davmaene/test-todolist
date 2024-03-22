@@ -4,27 +4,47 @@ import { deleteTask } from '../actions/taskActions';
 
 const TaskList = ({ tasks, deleteTask }) => {
     return (
-        <>
-            <div>
-                <h1>Liste des tâches</h1>
-                <p>La liste des toutes les tâches</p>
-            </div>
-            <ul>
-                {Array.from(tasks).length > 0 ? (
-                    <>
-                        {tasks.map(task => (
-                            <li key={task.id}>
-                                {task.name}
-                                <button onClick={() => deleteTask(task.id)}>Delete</button>
-                            </li>
-                        ))}
+        <div className='d-flex justify-content-center w-100'>
+            <div className="col-lg-8">
+                <div>
+                    <h1 className='text-center'>Liste des tâches</h1>
+                    <p className='text-center'>La liste des toutes les tâches</p>
+                </div>
+                <div className="w-100 d-flex justify-content-center">
+                    <button className="btn btn-primary align-self-center" onClick={(e) => {
+                        e.preventDefault()
+                        window.location.href = "#/app/add"
+                    }}>
+                        Ajouter une tâche
+                    </button>
+                </div>
+                <hr />
+                <div className="w-100">
+                    {Array.from(tasks).length > 0 ? (
+                        <>
+                            <ul className="list-group list-group-flush ">
+                                {tasks.map(task => (
+                                    <li className="list-group-item d-flex justify-content-between align-items-start" key={task.id}>
+                                        <div class="ms-2 me-auto">
+                                            <div class="fw-bold">{task.date}</div>
+                                            {task.name}
+                                        </div>
+                                        <>
+                                            <button className='btn btn-danger' onClick={() => deleteTask(task.id)}>Supprimer</button>
+                                        </>
+                                    </li>
+                                ))}
+                            </ul>
+                        </>
+                    ) : <>
+                        <div className="w-100 p-2">
+                            <h5 className='text-center'>La liste est vide</h5>
+                        </div>
                     </>
-                ) : <>
-                    <h5>La liste est vide</h5>
-                </>}
-
-            </ul>
-        </>
+                    }
+                </div>
+            </div>
+        </div>
     );
 };
 

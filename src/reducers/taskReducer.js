@@ -1,5 +1,7 @@
 const initialState = {
-    tasks: [],
+    tasks: [
+        { id: 1882929, name: "Test 001", date: new Date().toLocaleString() }
+    ],
     users: [
         { id: 1, username: 'admin', password: 'admin' },
         { id: 2, username: 'user', password: 'password' },
