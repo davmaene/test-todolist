@@ -31,7 +31,7 @@ const taskReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isAuthenticated: false,
-                authError: 'Invalid username or password'
+                authError: 'Mot de passe ou nom d\'utilisateur incorrect !'
             };
         case 'LOGIN':
             const { username, password } = action.payload;
