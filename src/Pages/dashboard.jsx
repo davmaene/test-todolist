@@ -6,7 +6,7 @@ import { Navigate as Redirect } from 'react-router-dom';
 const TaskList = ({ tasks, deleteTask, logout, isAuthenticated }) => {
     const [redirectToTasks,] = useState(true)
 
-    if (isAuthenticated && redirectToTasks) {
+    if (!isAuthenticated) {
         return <Redirect to="/app/auth" />;
     }
 
@@ -38,8 +38,8 @@ const TaskList = ({ tasks, deleteTask, logout, isAuthenticated }) => {
                             <ul className="list-group list-group-flush ">
                                 {tasks.map(task => (
                                     <li className="list-group-item d-flex justify-content-between align-items-start" key={task.id}>
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold">{task.date}</div>
+                                        <div className="ms-2 me-auto">
+                                            <div className="fw-bold">{task.date}</div>
                                             {task.name}
                                         </div>
                                         <>

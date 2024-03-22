@@ -25,7 +25,7 @@ const TaskForm = ({ addTask, authError, logout, isAuthenticated }) => {
         }
     };
 
-    if (isAuthenticated && redirectToTasks) {
+    if (!isAuthenticated) {
         return <Redirect to="/app/auth" />;
     }
 
